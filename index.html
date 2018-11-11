@@ -3,3 +3,887 @@
 <p><span style="color: #339966;"><strong>I'm a trail runner addict at day and a geek at night.</strong></span></p>
 <p><span style="color: #339966;"><strong>Welcome to my website where I'm practicing to become a machine learning expert.&nbsp;<img src="https://html-online.com/editor/tinymce4_6_5/plugins/emoticons/img/smiley-sealed.gif" alt="sealed" /></strong></span></p>
 <p>&nbsp;</p>
+
+
+<p><span style="color: #339966;"><strong>Les boucles de répétition :
+
+
+Une boucle permet de répéter un même traitement, zéro (rarement), une ou plusieurs fois. Le langage Java offre trois sortes de boucles :
+
+                do ... while (Faire ... Tantque ...),
+                while ...    (Tant que ...) et
+                for   ...    (Pour ...)
+
+A) Boucle do ... while ... (Faire .... Tant que)
+
+1) Syntaxe
+             do
+                     instruction à répéter
+             while (condition pour continuer vaut vrai) ;
+
+    L'instruction à répéter peut être simple (une seule action),
+    structurée (une autre instruction de contrôle) ou composée
+   (c'est le cas le plus fréquent).
+
+   Exemples de syntaxe :
+
+                 1.   int somme = 0, int n = 1 ;
+
+                      /* instruction à répéter est composée */
+                      do
+                         { somme = somme + n ;
+                           n     = n + 1;
+                         }
+                   while (n <= 10);
+
+                 2.   int indice = 0;
+
+                      /* instruction à répéter est simple */
+                      do
+                          indice = indice + 1 ;
+                      while (indice < 5);
+
+                 3.   int age;
+                      .....
+                      /* instruction à répéter est structurée */
+                      do
+                       {
+                         if (age >= 18)
+                          System.out.println("C'est un adulte");
+                         else
+                          age = age + 5;
+                      } while (age < 18);
+
+
+
+                 4.   int age;
+                      .....
+                      /* instruction à répéter est composée ... */
+                      do
+                {
+                          System.out.println("age = " + age);
+
+                         if (age >= 18)
+                           System.out.println("C'est un adulte");
+                         else
+                           age = age + 5;
+                       }
+                   while (age < 18);
+
+
+
+2) Fonctionnement :
+
+
+              Étape 1 : effectuer (d'abord) l'instruction à répéter
+
+              Étape 2 : vérifier (après) la condition pour continuer :
+
+                  a) si la condition est vraie, on revient
+                             à l'étape 1;
+
+                  b) si non (la condition est fausse), on
+                     termine la boucle.
+
+              Conclusion :
+
+              On effectue au moins une fois l'instruction à répéter     
+              avec la boucle do ... while ...
+
+
+3) Domaine d'utilisation :
+
+              On utilise la boucle do ... while ... quand on ne sait 
+              pas à l'avance, le nombre de fois qu'on doit répéter le 
+              même traitement. 
+
+              Applications classiques : 
+              1.      répéter   
+                        le même traitement
+                      tantque l'usager décide de continuer
+              2. validation d'une donnée
+              3. calcul scientifique
+              4. etc . . .
+
+              Plusieurs exemples sont expliqués en classe. Les 
+              documents ont été distribués et ces exemples sont aussi 
+              disponibles sur la page Web du cours IFT 1870
+
+
+
+3) Exemple de simulation :
+
+
+   Exemple 1 :
+
+           Soient j et k, deux variables déclarées de type int.
+           Quelle est la valeur affichée à l'écran par la section de
+           programme suivant ?
+
+           ...
+           int k = 1,  j = 10;
+
+           do
+            {
+                  if ( k >= 3 )
+                      j = j + 1;
+                  else
+                      j = j - 1;
+
+                  k = k + 1;
+
+                   System.out.print(j + " " + k + " ");
+            }
+           while (j <10);
+
+            System.out.println(j * k);
+            System.out.println("FIN");
+           ...
+
+
+Solution : (On utilise le symbole ^ pour représenter un espace)
+
+        j    |     k    | Affichage à l'écran
+    -----------------------------------------------------
+       10    |     1    |
+        9    |     2    | 9 2 8 3 9 4 1 5 50
+        8    |     3    | FIN
+        9    |     4    |
+       10    |     5    |
+
+Exercice:
+ Soient n et s, deux variables déclarées de type int.
+ Quelle est la valeur affichée à l'écran par la section de
+ programme suivant ?
+               int s = 0, n = 572 ;
+
+               do
+                  { s = s + n % 10 ;
+                     System.out.println(s + " " + n);
+                    n = n / 10 ;
+                   }
+               while ( n > 0 );
+               System.out.println("Fin");
+
+
+
+4) Exemple de calcul avec do … while :
+
+/* Fichier DoWhile1.java
+   Une application (parmi plusieurs) de la boucle do ... while ....
+
+   Faire certains calculs
+           
+   Ce programme permet :
+    1. de calculer et d'afficher la somme = 1 + 2 + ... + 100          
+    2. de comparer avec la formule : 1 + 2 + ... + n = n x (n+1) / 2
+       2 bornes
+    3. d'utiliser certaines écritures raccoursies pour obtenir
+       la même somme
+*/
+
+
+public class DoWhile1
+{
+   public static void main (String[] args)
+   {
+    final int LIMITE = 100 ; // calcul de somme = 1 + 2 + 3 + ... + 100
+                
+    int somme  = 0, /* on initialise souvent une somme par 0 */
+        valeur = 1; /* première valeur à ajouter dans la somme */
+
+    /* avec do ... while ... */ 
+    do {
+           somme  = somme + valeur ;
+           valeur = valeur + 1 ;
+    } while ( valeur <= LIMITE );
+
+   System.out.println("La somme 1 + 2 + ... + " + LIMITE + 
+                              " = " + somme);
+
+   System.out.println("\nLa meme somme avec la formule : ");
+   System.out.print(" 1 + 2 + ... + n = n x (n+1) / 2        : ");
+   System.out.println( LIMITE * (LIMITE+1) / 2 );
+
+   System.out.println("\nLa meme somme avec l'ecriture raccourcie : ");
+   somme = 0;
+   valeur = 1;
+   do {
+        somme  += valeur ;     /*  <==> somme = somme + valeur ; */
+        valeur++ ;             /*  dans ce contexte :
+                                                                                                              
+                                       valeur = valeur + 1;
+                                    ou valeur += 1 ;                                                                                                               
+                                    ou valeur++;                                                                                                     
+                                */
+   } while ( valeur <= LIMITE );
+   System.out.println(somme + " (meme valeur)\n");                                                                
+ }
+}
+
+
+
+/* Exécution :
+
+La somme 1 + 2 + ... + 100 = 5050
+
+La meme somme avec la formule : 
+ 1 + 2 + ... + n = n x (n+1) / 2        : 5050
+
+La meme somme avec l'ecriture raccourcie : 
+5050 (meme valeur)
+
+*/
+
+4) Exemple de validation avec do … while :
+
+/* Fichiers DoWhile2.java et Utile.Java
+   Buts : Ce programme permet de saisir et valider
+            - l'âge d'une personne entre 0 an et 125 ans
+            - le sexe (parmi f, F, m ou M)
+*/
+
+import java.io.*;
+public class DoWhile2
+{
+	public static void main (String[] args)throws IOException
+	{
+	   final int AGE_MIN =    0,
+   	             AGE_MAX =  125;
+         int age ;
+	   boolean valide ;
+	   
+	   // saisir et valider l'âge entre 2 bornes
+	   do {
+		   
+		   age = Utile.lireEntier("Tapez l'age entre " + AGE_MIN + 
+                    " et " + AGE_MAX + "  ");
+		   
+		   valide = (age >= AGE_MIN && age <= AGE_MAX);
+		   
+		   if (! valide)
+			   System.out.println(age + " est hors bornes");
+		   
+	   } while (!valide);
+	   
+	   System.out.println("Age saisi : " + age + " an(s)");
+	   
+	   char sexe ;
+	   
+	   // saisir et valider le sexe (parmi f, F, m et M)
+	   do {
+		   
+		   sexe = Utile.lireCaractere("Tapez f, F, m ou M " +
+                            " pour le sexe ");
+		   valide = sexe == 'f' || sexe == 'F' || sexe == 'm' 
+                                    | sexe == 'M';
+		   
+		   if (! valide)
+			   System.out.println("Le caractere tape " + sexe 
+                                           + " est invalide");
+		   
+	   } while (!valide);
+	   
+	   System.out.println("Caractere saisi pour le sexe  : " + sexe );
+	}
+}
+
+/* Exécution:
+Tapez l'age entre 0 et 125  567
+567 est hors bornes
+Tapez l'age entre 0 et 125  -321
+-321 est hors bornes
+Tapez l'age entre 0 et 125  27
+Age saisi : 27 an(s)
+Tapez f, F, m ou M pour le sexe g
+Le caractere tape g est invalide
+Tapez f, F, m ou M pour le sexe ?
+Le caractere tape ? est invalide
+Tapez f, F, m ou M pour le sexe m
+Caractere saisi pour le sexe  : m
+*/
+
+
+5) Répétition du même traitement avec do … while :
+
+/* Fichiers DoWhile3.java et Utile.Java
+   Buts : Ce programme permet de saisir deux nombres positifs (exemples
+          48 et 36), de déterminer et d'afficher le plus grand commun
+          diviseur (PGCD) entre ces deux nombres.
+          Le programme permet de répéter ce même traitement tant  
+        Que l'usager décide de continuer
+*/
+
+import java.io.*;
+public class DoWhile3
+{
+  public static void main (String[] args)throws IOException
+  {
+	int nombre1, nombre2, reste ;
+	char reponse; // pour la réponse de l'usager
+			
+	do {
+	  System.out.println();
+	  nombre1 = Utile.lireEntier("Entrez le premier nombre > 0 ");
+	  nombre2 = Utile.lireEntier("Entrez le deuxieme nombre > 0 ");
+	  System.out.print("Le PGCD entre " + nombre1 + " et " + nombre2
+							 + " est : ");
+			
+	
+
+
+
+
+     	  // déterminer le PGCD (à simuler pour comprendre)
+	  do {
+		  reste = nombre1 % nombre2 ;
+		  nombre1 = nombre2 ;
+		  nombre2 = reste;
+	  } while (reste != 0);
+	
+   	  System.out.println(nombre1);
+	  System.out.println();
+			
+	  // demander si l'usager veut continuer
+	  reponse = Utile.lireCaractere("Voulez-vous continuer ? (o/n) ");
+			
+	 } while (reponse == 'o' || reponse == 'O');	   	      
+	}
+}
+/* Exécution:
+Entrez le premier nombre > 0 48
+Entrez le deuxieme nombre > 0 36
+Le PGCD entre 48 et 36 est : 12
+
+Voulez-vous continuer ? (o/n) o
+
+Entrez le premier nombre > 0 35
+Entrez le deuxieme nombre > 0 105
+Le PGCD entre 35 et 105 est : 35
+
+Voulez-vous continuer ? (o/n) o
+
+Entrez le premier nombre > 0 7
+Entrez le deuxieme nombre > 0 9
+Le PGCD entre 7 et 9 est : 1
+
+Voulez-vous continuer ? (o/n) n
+*/                                           
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B) Boucle while ... (Tant que ...)
+
+1) Syntaxe
+
+     while (condition) 
+                 instruction
+
+
+    L'instruction à répéter peut être simple (une seule action),
+    structurée (une autre instruction de contrôle) ou composée
+    (c'est le cas le plus fréquent).
+
+   Exemples de syntaxe :
+
+     1.   int somme = 0, int n = 1 ;
+
+          /* instruction à répéter est composée */
+
+          while ( n <= 10 )
+             {  
+                somme = somme + n ;
+                n     = n + 1;
+             }
+           System.out.println("somme = 1 + 2 + 3 + ... + 10 = " 
+                                       + somme);
+
+      2.   int  n = 5 ;
+
+           /* instruction à répéter est structurée */
+
+                      while ( n <= 10 )
+                         if ( n == 10 )
+                             System.out.println("Fin");
+                         else
+                            n = n + 1;
+
+      3.   int  n = 5 ;
+
+           /* instruction à répéter est simple */
+
+           while ( n <= 10 )
+               n = n + 1;
+
+2) Fonctionnement :
+
+       Étape 1 : vérifier d'abord la condition
+
+       Étape 2 : si la condition vaut vraie alors
+                           a) on effectue l'instruction à répéter
+                           b) on revient à l'étape 1
+                 si non, on quitte la boucle
+
+
+   Pour  while (condition) . . ., il faut s'assurer que la 
+   condition soit bien définie avant la boucle while et
+   qu'à l'intérieur de while, on modifie la condition
+   pour qu'elle vaut faux (false) à un moment donné afin de  
+   quitter la boucle.
+
+
+3) Domaine d'utilisation :
+
+    On utilise la boucle while ... quand on ne sait pas à l'avance
+    le nombre de fois qu'on doit répéter le même traitement. On
+    l'utilise surtout pour la lecture d'un fichier, la recherche d'un
+    élément dans un tableau, les calculs scientifiques.
+
+
+    Exemples de calculs :
+
+      Exercice 1 :
+
+       Écrire un bloc d'instructions permettant de calculer et 
+       d'afficher la somme suivante :
+
+           somme = 1 + 1/3 + 1/5 + 1/7 + ... + 1/999
+
+       Solution:
+
+           const int BORNE1 =   1,
+                     BORNE2 = 999,
+                     LE_PAS =   2; 
+           double denominateur = BORNE1, 
+                 somme = 0 ;
+
+                 while ( denominateur <= BORNE2 )
+                   {
+                        somme += 1 / denominateur ;
+                        denominateur += LE_PAS;
+                   }
+
+                  System.out.println("La somme demandée : " + somme);
+
+       Exercice 2 : refaire le même problème avec la boucle do … while
+
+ Exercice 3 : 
+
+ Calculer la somme 1 – 1/3 + 1/5 – 1/7 + . . .  1 / 99999
+
+en utilisant la boucle while …
+en utilisant la boucle do … while …
+
+
+
+
+
+
+
+Exercice 4 :
+
+ Simulez la partie suivante d'un programme. Utilisez le caractère
+ ^ (chapeau) pour représenter un espace (un blanc).
+
+            int  nombre = 72,
+                 s = 0,
+                 e = 0;
+
+            while (nombre > 0 ) {
+                  System.out.println(nombre + " " + s + " " + e);
+                 
+                 s += nombre %  10 ;
+    
+                 e = e * 10 + nombre % 10 ;
+
+                 nombre /= 10;                  
+}
+
+ 			 System.out.println("s= " + s + " e = " + e);
+
+
+       Exercice : simuler le même problème où nombre est initialisé
+                  avec 726
+
+       Que représentent s et e vs le nombre ?
+
+   Validation de données :
+
+       Écrire une partie d'un programme permettant de saisir et de 
+       valider un entier entre 1 et 1000 inclusivement (exemple n = 6).   
+       Le programme calcule et affiche à l'écran la somme des diviseurs 
+       de n (si n vaut 6, la somme des diviseurs de n est 1 + 2 + 3 + 6 
+       = 12).
+
+       Solution:
+
+            const int BORNE1 =    1,
+                      BORNE2 = 1000;
+ 
+            int nombre, /* le nombre à saisir */
+                candidat, /* est-il un diviseur du nombre ? */
+                somDivi;  /* somme des diviseurs du nombre */
+
+            boolean valide; 
+
+
+
+
+            /* saisie et valider le nombre : */
+
+                valide = true ; /* pour démarrer while */
+
+
+
+
+                while (valide) {
+
+                 nombre = Utile.lireEntier("Tapez un nombre entre"  
+                     + BORNE1 + "et " + BORNE2 + " ");
+
+                 valide = nombre >= BORNE1 && nombre <= BORNE2 ;
+
+                 if (!valide)
+                   System.out.println("Le nombre est hors des "
+                        + " deux bornes, retapez SVP!\n\n");
+
+                }
+
+              /* calculer la somme des diviseurs du nombre : */
+
+                somDivi = 0 ;
+                candidat = 1; 
+                while  (candidat <= nombre) {
+                    if (nombre % candidat == 0)
+                           somDivi += candidat ;
+                    candidat++; 
+    }
+                 System.out.println("La somme des diviseurs de " +
+                          nombre + " est : " + somDivi);
+
+
+   Boucle while … vs boucle do … while :
+
+Avec do … while … on exécute AU MOINS UNE FOIS l'instruction à 
+répéter;
+Avec while … il est possible qu'on n'exécute aucune fois
+l'instruction à répéter :
+   int age = 23 ;
+   while (age <= 18) {
+         System.out.println("age = %d\n", age);
+        age -= 5 ;
+   }
+  System.out.println("Fin de while");
+
+
+Pour fabriquer une suite d'instructions équivalente
+à :
+
+         while (condition)
+                    instruction
+
+on écrit :
+
+         if (condition)
+              do 
+                     instruction
+              while (condition);
+
+
+
+
+Boucle for ... (Pour ...)
+
+1) Syntaxe
+
+     
+       for   (<exp1>;  <exp2>;  <exp3>) 
+
+                                 instruction à répéter
+
+    L'instruction à répéter peut être simple (une seule action),
+    structurée (une autre instruction de contrôle) ou composée
+    (c'est le cas le plus fréquent).
+
+     L'expression 1 (exp1) : initialisation
+
+      L'expression 2 (exp2) : condition pour continuer qui 
+                             est évaluée avant chaque 
+                             itération
+                             (chaque tour de boucle)
+
+      L'expression 3 (exp3) : ajustement (souvent :l'incrémentation 
+                                   ou la décrémentation)
+
+   Exemples de syntaxe :
+
+         1.   for ( i = 1 ; i <= 10 ; i = i + 1 )
+                       System.out.println("Bonsoir!");
+
+              Cette boucle fait afficher 10 lignes qui contient le
+              message Bonsoir!
+
+int somme = 0, valeur ;
+
+              for ( valeur = 1 ; valeur <= 15 ; valeur += 2 )
+                      somme += valeur ;
+
+              Cette boucle calcule la somme 1 + 3 + 5 + . . . + 13 + 15
+
+
+         3.   int nombre = 720, candidat, nbDivi = 0, somDivi = 0;
+
+              for ( candidat = 1 ; candidat <= nombre ; candidat++)
+                      if (nombre % candidat == 0)
+                             { nbDivi++; /* un diviseur de plus */
+                               somDivi += candidat ;
+                             }
+
+              Cette boucle compte le nombre de diviseurs de 720,  
+              calcule la somme des diviseurs de 720.
+
+
+
+
+2) Fonctionnement :
+
+
+Fonctionnement théorique (pour tous les cas) :
+
+          expression 1 :initialisation
+
+          while (expression 2) {
+              instruction à répéter
+              
+              expression 3 (ajustement)  
+    }
+
+Fonctionnement pratique pour le cas le plus fréquent :
+
+          for ( i = 1 ; i <= n ; i++)
+                    instruction à répéter
+
+          Effectuer n fois l'instruction à répéter
+          (i vaut 1 on fait …, i vaut 2 on fait …, …, 
+           i vaut n on fait  … )
+
+Compréhension :
+
+Combien de fois le message "Bonsoir" est-il affiché ?
+
+for (i = 1 ; i <= 3 ; i++)
+      for ( j = 1 ; j <= 4 ; j++)
+               System.out.println("Bonsoir");
+
+Réponse :
+    i vaut 1 : on affiche 4 fois (j de 1 à 4) Bonsoir
+    i vaut 2 : on affiche 4 fois (j de 1 à 4) Bonsoir
+    i vaut 3 : on affiche 4 fois (j de 1 à 4) Bonsoir
+
+    Au total : 3 x 4 = 12 fois
+
+Combien de fois le message "Bonsoir" est-il affiché ?
+
+for (i = 1 ; i <= 3 ; i+= 2)
+      for ( j = 1 ; j <= 4 ; j++)
+               System.out.println("Bonsoir");
+
+Réponse :
+    i vaut 1 : (1 <= 3 vaut VRAI) on affiche 4 fois (j de 1 à 4)          
+                Bonsoir
+    i vaut 3 : (3 <= 3 vaut VRAI) on affiche 4 fois (j de 1 à 4) 
+                Bonsoir
+    i vaut 5 : (5 <= 3 vaut FAUX) on quitte la boucle for
+
+    Au total : 2 x 4 = 8 fois
+
+
+
+   
+          
+boucle for vs boucle while :
+
+Écrire une boucle while équivalente à la boucle for suivante :
+
+    int somme = 0, valeur;
+
+    for (valeur = 10 ; valeur <= 50 ; valeur += 5)
+             somme += valeur ;
+     System.out.println("somme = " + somme);
+
+Réponse :
+
+    int somme = 0, valeur;
+
+          /* initialisation :*/
+          valeur = 10 ;
+
+          while (valeur <= 50) {
+     somme += valeur ;
+     /* ajustement : */
+     valeur += 5;
+          }
+     System.out.println("somme = " + somme);
+
+Écrire une boucle for équivalente à la boucle while suivante :
+
+    int produit = 1, valeur = 8 ;
+
+    while (valeur <= 16) {
+             produit *= valeur ;
+
+             valeur += 2 ;
+    }
+     System.out.println("produit = " + produit);
+
+Réponse :
+
+    int produit = 1, valeur;
+
+    for (valeur = 8 ; valeur <= 16; valeur += 2) 
+             produit *= valeur ;
+
+     System.out.println("produit = " + produit);
+
+             
+    2) Utilisation de la boucle for :
+
+         On utilise la boucle for quand on sait à l'avance le nombre de
+         fois qu'on répète le même traitement. C'est le cas des valeurs
+         consécutives entre deux bornes données. On l'utilise également
+         quand on répète le même traitement en connaissant à l'avance :
+la valeur de départ
+la valeur d'arrivée
+le pas (qui est une constante) entre deux valeurs successives
+
+Exemple 1 :
+
+
+   Écrire des blocs d'instructions qui permettent d'afficher :
+
+               12345
+               2345
+               345
+               45
+               5
+
+  Solution :
+
+   #include <stdio.h>
+
+   void main()
+   {  int   ligne, colonne ;
+
+      for ( ligne = 1 ; ligne <= 5 ; ligne++ )
+        { for (colonne = ligne ; colonne <= 5 ; colonne++)
+                 System.out.print (colonne + " ");
+
+          System.out.println();
+        }
+       System.out.println();
+
+   }
+
+Exemple 2:
+
+
+   Écrire des blocs d'instructions qui permettent de:
+
+          1. calculer et afficher la somme suivante :
+
+                 s = 5 + 6 + 7 + ... + 49
+
+          2. d'estimer la valeur de PI sachant que :
+
+             PI / 4 = 1 - 1/3 + 1/5 -1/7 + 1/9 - ..... 1/29999
+
+  Exemple 3 :
+
+    Le nombre 720 a 30 diviseurs (1, 2, 3, 4, 5, 6, 8, 9, ..., 360,  
+    720)
+    Un autre nombre, supérieur à 720 mais inférieur à 1000, en a 
+    encore plus.
+
+    Écrire un programme qui permet de découvrir ce nombre et
+    d'afficher ses diviseurs.
+
+
+
+
+
+
+
+ Exemple 4 :
+
+   Écrire un programme qui permet de :
+
+         1. saisir et valider le nombre total de pattes de
+            poules (à 2 pattes) et de vaches (à 4 pattes)
+
+         2. afficher toutes les solutions possibles du nombre
+            de poules et de vaches.
+
+Solution :
+
+
+import java.io.*;
+
+public class ForExemple2
+{
+   public static void main (String[] args) throws IOException
+   {  int nbPattes,  // le nombre total de pattes
+   	    nbVache,   // le nombre de vache(s) possible(s)
+	    nbPoule;   // le nombre de poule(s) possible(s)
+	   
+          boolean valide ;
+	   
+	   // saisir et VALIDER le nombre total de pattes
+    do {
+      nbPattes = Utile.lireEntier("Entrez le nombre total de pattes ");
+			
+      // un nombre positif et pair
+	valide = nbPattes >= 0 && (nbPattes % 2 == 0);
+			
+	if (!valide) { // si invalide 
+	  if (nbPattes < 0)
+	     System.out.println("On attend un nombre >= 0 ");
+        if (nbPattes % 2 != 0)
+	     System.out.println("Un nombre pair SVP! ");
+			}
+    }while ( !valide);
+	
+    System.out.println("\nLes solutions possibles avec " +
+	         nbPattes + " pattes au total ");
+	
+    nbPoule = nbPattes / 2 ; // nombre maximum de poules
+	   
+    for (nbVache = 0 ; nbVache <= nbPattes / 4 ; nbVache ++) {
+		   Utile.afficher(nbVache, 3);
+		   System.out.print(" vache(s) et ");
+		   Utile.afficher(nbPoule, 3);
+		   System.out.println(" poule(s)");
+		   
+		   nbPoule -= 2; // 2 poules de moins
+	   }  	                
+	}</strong></span></p>
+
+}  
